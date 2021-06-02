@@ -8,9 +8,7 @@ namespace Dominio
 {
     public class TipoInvestimento
     {
-        public int Id { get; set; }
+        public int TipoInvestimentoId { get; set; }
         public string Nome { get; set; }
-
-        public virtual IEnumerable<Investimento> Investimentos { get; set; }
     }
 }

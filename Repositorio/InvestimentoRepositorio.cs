@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +19,7 @@ namespace Repositorio
 
         public void Salvar(Investimento investimento)
         {
-            if (investimento.Id > 0)
+            if (investimento.InvestimentoId > 0)
             {
                 Alterar(investimento);
             }
@@ -31,7 +31,9 @@ namespace Repositorio
 
         public IEnumerable<Investimento> Listar()
         {
-            return _contexto.Investimentos.Include(x => x.TipoInvestimento).ToList();
+            return _contexto.Investimentos
+                .Include(x => x.TipoInvestimento)
+                .ToList();
         }
 
         public Investimento ListarPorId(int id)
@@ -41,24 +43,24 @@ namespace Repositorio
 
         public void Adicionar(Investimento investimento)
         {
-            investimento.TipoInvestimento = _contexto.TiposdeInvestimento.ToList().Where(x => x.Id == investimento.TipoInvestimento.Id).FirstOrDefault();
+            investimento.TipoInvestimento = _contexto.TiposdeInvestimento.ToList().Where(x => x.TipoInvestimentoId == investimento.TipoInvestimento.TipoInvestimentoId).FirstOrDefault();
             _contexto.Investimentos.Add(investimento);
             _contexto.SaveChanges();
         }
 
         public void Alterar(Investimento investimento)
         {
-            Investimento investimentoSalvar = _contexto.Investimentos.Where(x => x.Id == investimento.Id).First();
+            Investimento investimentoSalvar = _contexto.Investimentos.Where(x => x.InvestimentoId == investimento.InvestimentoId).First();
             investimentoSalvar.Nome = investimento.Nome;
             investimentoSalvar.Quantidade = investimento.Quantidade;
-            investimentoSalvar.Valor = investimento.Valor;
+            investimentoSalvar.PrecoMedio = investimento.PrecoMedio;
             investimentoSalvar.ValorTotal = investimento.ValorTotal;
             _contexto.SaveChanges();
         }
 
         public void Excluir(int id)
         {
-            Investimento investimentoExcluir = _contexto.Investimentos.First(x => x.Id == id);
+            Investimento investimentoExcluir = _contexto.Investimentos.First(x => x.InvestimentoId == id);
             _contexto.Set<Investimento>().Remove(investimentoExcluir);
             _contexto.SaveChanges();
         }

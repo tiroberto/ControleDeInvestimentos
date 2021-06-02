@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Carteira
+    public class InvestimentoCarteira
     {
+        public int InvestimentoId { get; set; }
+        public Investimento Investimento { get; set; }
         public int CarteiraId { get; set; }
-        public string Nome { get; set; }
-        public IEnumerable<Investimento> Investimentos { get; set; }
+        public Carteira Carteira { get; set; }
     }
 }
