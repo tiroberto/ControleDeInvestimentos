@@ -10,5 +10,6 @@ namespace Dominio
     {
         public int TipoInvestimentoId { get; set; }
         public string Nome { get; set; }
+        public IEnumerable<Investimento> Investimentos { get; set; }
     }
 }

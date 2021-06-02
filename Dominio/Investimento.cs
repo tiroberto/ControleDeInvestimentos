@@ -14,7 +14,6 @@ namespace Dominio
         public decimal PrecoMedio { get; set; }
         public decimal Quantidade { get; set; }
         public TipoInvestimento TipoInvestimento { get; set; }
-        public int TipoInvestimentoId { get; set; }
-        public IEnumerable<Carteira> Carteira { get; set; }
+        public IEnumerable<InvestimentoCarteira> InvestimentoCarteiras { get; set; }
     }
 }

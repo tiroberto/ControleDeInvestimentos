@@ -15,6 +15,10 @@ namespace Repositorio.Configuracoes
         {
             builder.ToTable("investimento_carteira", "controledeinvestimentos");
             builder.HasKey(ic => new { ic.InvestimentoId, ic.CarteiraId });
+            builder.HasOne(i => i.Investimento)
+                .WithMany(c => c.InvestimentoCarteiras);
+            builder.HasOne(c => c.Carteira)
+                .WithMany(i => i.InvestimentoCarteiras);
         }
     }
 }

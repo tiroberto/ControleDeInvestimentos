@@ -33,12 +33,15 @@ namespace Repositorio
         {
             return _contexto.Investimentos
                 .Include(x => x.TipoInvestimento)
+                //.Include(x=>x.InvestimentoCarteiras.Select(c=>c.Carteira))
                 .ToList();
         }
 
         public Investimento ListarPorId(int id)
         {
-            return _contexto.Investimentos.Find(id);
+            return _contexto.Investimentos
+                .Include(c=>c.TipoInvestimento)
+                .First(x=>x.InvestimentoId == id);
         }
 
         public void Adicionar(Investimento investimento)
@@ -50,18 +53,15 @@ namespace Repositorio
 
         public void Alterar(Investimento investimento)
         {
-            Investimento investimentoSalvar = _contexto.Investimentos.Where(x => x.InvestimentoId == investimento.InvestimentoId).First();
-            investimentoSalvar.Nome = investimento.Nome;
-            investimentoSalvar.Quantidade = investimento.Quantidade;
-            investimentoSalvar.PrecoMedio = investimento.PrecoMedio;
-            investimentoSalvar.ValorTotal = investimento.ValorTotal;
+            investimento.TipoInvestimento = _contexto.TiposdeInvestimento.ToList().Where(x => x.TipoInvestimentoId == investimento.TipoInvestimento.TipoInvestimentoId).FirstOrDefault();
+            _contexto.Update(investimento);
             _contexto.SaveChanges();
         }
 
         public void Excluir(int id)
         {
             Investimento investimentoExcluir = _contexto.Investimentos.First(x => x.InvestimentoId == id);
-            _contexto.Set<Investimento>().Remove(investimentoExcluir);
+            _contexto.Remove(investimentoExcluir);
             _contexto.SaveChanges();
         }
     }

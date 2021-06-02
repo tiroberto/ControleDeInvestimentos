@@ -25,8 +25,8 @@ namespace Repositorio.Configuracoes
                 .HasColumnName("Quantidade");
             builder.Property(i => i.ValorTotal)
                 .HasColumnName("ValorTotal");
-            builder.Property(i => i.TipoInvestimentoId)
-                .HasColumnName("TipoInvestimentoId");
+            builder.HasOne(t => t.TipoInvestimento)
+                .WithMany(i => i.Investimentos);
         }
     }
 }

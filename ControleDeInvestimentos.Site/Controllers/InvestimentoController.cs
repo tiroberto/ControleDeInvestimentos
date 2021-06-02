@@ -31,8 +31,7 @@ namespace ControleDeInvestimentos.Site.Controllers
                 (
                     appTipoInvestimento.Listar(),
                     "TipoInvestimentoId",
-                    "Nome",
-                    ""
+                    "Nome"
                 );*/
             ViewBag.listaTipoInvestimento = appTipoInvestimento.Listar();
             return View();
@@ -47,22 +46,16 @@ namespace ControleDeInvestimentos.Site.Controllers
                 appInvestimento.Salvar(investimento);
                 return RedirectToAction("Index");
             }            
-            TipoInvestimentoAplicacao appTipoInvestimento = new TipoInvestimentoAplicacao();
-            ViewBag.listaTipoInvestimento = new SelectList
-                (
-                    appTipoInvestimento.Listar(),
-                    "TipoInvestimentoId",
-                    "Nome"
-                );
+            //TipoInvestimentoAplicacao appTipoInvestimento = new TipoInvestimentoAplicacao();
             return View(investimento);
         }
 
         public IActionResult Editar(int id)
         {
-            var investimento = appInvestimento.ListarPorId(id);
-            if (investimento == null)
+            var investimentoDetalhes = appInvestimento.ListarPorId(id);
+            if (investimentoDetalhes == null)
                 return NotFound();
-            return View(investimento);
+            return View(investimentoDetalhes);
         }
 
         [HttpPost]
@@ -79,18 +72,18 @@ namespace ControleDeInvestimentos.Site.Controllers
 
         public IActionResult Detalhes(int id)
         {
-            var investimento = appInvestimento.ListarPorId(id);
-            if (investimento == null)
+            var investimentoDetalhes = appInvestimento.ListarPorId(id);
+            if (investimentoDetalhes == null)
                 return NotFound();
-            return View(investimento);
+            return View(investimentoDetalhes);
         }
 
         public IActionResult Excluir(int id)
         {
-            var investimento = appInvestimento.ListarPorId(id);
-            if (investimento == null)
+            var investimentoDetalhes = appInvestimento.ListarPorId(id);
+            if (investimentoDetalhes == null)
                 return NotFound();
-            return View(investimento);
+            return View(investimentoDetalhes);
         }
 
         [HttpPost, ActionName("Excluir")]
@@ -98,7 +91,7 @@ namespace ControleDeInvestimentos.Site.Controllers
         public IActionResult ExcluirConfirmado(int id)
         {
             appInvestimento.Excluir(id);
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }

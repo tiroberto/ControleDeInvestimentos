@@ -31,7 +31,9 @@ namespace Repositorio
 
         public IEnumerable<Carteira> Listar()
         {
-            return _contexto.Carteiras.Include(x => x.Investimentos).Include(x => x.Investimentos.Select(i => i.TipoInvestimento)).ToList();
+            return _contexto.Carteiras
+                .Include(x => x.InvestimentoCarteiras.Select(i => i.Investimento))
+                .ToList();
         }
 
         public Carteira ListarPorId(int id)
@@ -41,7 +43,7 @@ namespace Repositorio
 
         public void Adicionar(Carteira carteira)
         {
-            carteira.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
+            //carteira.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
             _contexto.Carteiras.Add(carteira);
             _contexto.SaveChanges();
         }
@@ -49,7 +51,7 @@ namespace Repositorio
         public void Alterar(Carteira carteira)
         {
             Carteira carteiraSalvar = _contexto.Carteiras.Where(x => x.CarteiraId == carteira.CarteiraId).First();
-            carteiraSalvar.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
+            //carteiraSalvar.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
             carteiraSalvar.Nome = carteira.Nome;
             _contexto.SaveChanges();
         }
@@ -57,7 +59,7 @@ namespace Repositorio
         public void Excluir(int id)
         {
             Carteira carteiraExcluir = _contexto.Carteiras.Where(x => x.CarteiraId == id).First();
-            carteiraExcluir.Investimentos = null;
+            //carteiraExcluir.Investimentos = null;
             _contexto.Set<Carteira>().Remove(carteiraExcluir);
             _contexto.SaveChanges();
         }
