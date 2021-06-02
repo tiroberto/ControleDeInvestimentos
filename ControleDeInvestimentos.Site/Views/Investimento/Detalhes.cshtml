@@ -1,0 +1,48 @@
+﻿@model Dominio.Investimento
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Investimento</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InvestimentoId)
+        </dd>
+        <dt class="col-sm-2">
+            Nome
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            Valor total
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ValorTotal)
+        </dd>
+        <dt class="col-sm-2">
+            Preço médio
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrecoMedio)
+        </dd>
+        <dt class="col-sm-2">
+            Quantidade
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Editar", new { id = @Model.InvestimentoId }) |
+    <a asp-action="Index">Voltar à lista</a>
+</div>

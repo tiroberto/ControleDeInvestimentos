@@ -8,13 +8,13 @@ namespace Dominio
 {
     public class Investimento
     {
-        public int Id { get; set; }
+        public int InvestimentoId { get; set; }
         public string Nome { get; set; }
         public decimal ValorTotal { get; set; }
-        public decimal Valor { get; set; }
-        public int Quantidade { get; set; }
+        public decimal PrecoMedio { get; set; }
+        public decimal Quantidade { get; set; }
         public TipoInvestimento TipoInvestimento { get; set; }
-
-        public virtual ICollection<Carteira> Carteira { get; set; }
+        public int TipoInvestimentoId { get; set; }
+        public IEnumerable<Carteira> Carteira { get; set; }
     }
 }
