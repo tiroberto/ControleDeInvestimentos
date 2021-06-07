@@ -19,7 +19,7 @@ namespace Repositorio
 
         public void Salvar(Carteira carteira)
         {
-            if(carteira.CarteiraId > 0)
+            if (carteira.CarteiraId > 0)
             {
                 Alterar(carteira);
             }
@@ -31,14 +31,20 @@ namespace Repositorio
 
         public IEnumerable<Carteira> Listar()
         {
+            //return    View(_context.Courses
+            //          .Include(c => c.CourseLecturers)
+            //          .ThenInclude(cl => cl.Lecturers)); 
             return _contexto.Carteiras
-                .Include(x => x.InvestimentoCarteiras.Select(i => i.Investimento))
-                .ToList();
+                .Include(i => i.InvestimentoCarteiras)
+                .ThenInclude(c => c.Carteira);
         }
 
         public Carteira ListarPorId(int id)
         {
-            return _contexto.Carteiras.Find(id);
+            return _contexto.Carteiras
+                .Include(ic => ic.InvestimentoCarteiras)
+                .ThenInclude(c => c.Investimento.TipoInvestimento)
+                .First(x => x.CarteiraId == id);
         }
 
         public void Adicionar(Carteira carteira)

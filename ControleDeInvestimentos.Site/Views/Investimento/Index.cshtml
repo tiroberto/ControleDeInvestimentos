@@ -20,18 +20,17 @@
     </thead>
     @foreach (var item in Model)
     {
-<tr>
-    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-    <td>@Html.DisplayFor(modelItem => item.TipoInvestimento.Nome)</td>
-    @*<td>@Html.DisplayFor(modelItem => item.InvestimentoCarteiras)</td>*@
-    <td>@Html.DisplayFor(modelItem => item.PrecoMedio)</td>
-    <td>@Html.DisplayFor(modelitem => item.Quantidade)</td>
-    <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
-    <td>
-        @Html.ActionLink("Editar", "Editar", new { id = item.InvestimentoId })
-        @Html.ActionLink("Detalhes", "Detalhes", new { id = item.InvestimentoId })
-        @Html.ActionLink("Excluir", "Excluir", new { id = item.InvestimentoId })
-    </td>
-</tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.TipoInvestimento.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.PrecoMedio)</td>
+            <td>@Html.DisplayFor(modelitem => item.Quantidade)</td>
+            <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.InvestimentoId }) |
+                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.InvestimentoId }) |
+                @Html.ActionLink("Excluir", "Excluir", new { id = item.InvestimentoId })
+            </td>
+        </tr>
     }
 </table>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Dominio.Carteira>
+
+@{
+    ViewData["Title"] = "Lista de carteiras";
+}
+
+<h2>Lista de Carteiras</h2>
+
+<p>@Html.ActionLink("Nova carteira", "Cadastrar")</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.CarteiraId }) |
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.CarteiraId }) |
+                    @Html.ActionLink("Excluir", "Excluir", new { id = item.CarteiraId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
