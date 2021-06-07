@@ -3,13 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorio", "Repositorio\Repositorio.csproj", "{A115D13D-FACE-43A0-B683-B309B8289917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositorio", "Repositorio\Repositorio.csproj", "{A115D13D-FACE-43A0-B683-B309B8289917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao", "Aplicacao\Aplicacao.csproj", "{51DF5964-4D12-427C-ADBE-9ED29438F751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacao", "Aplicacao\Aplicacao.csproj", "{51DF5964-4D12-427C-ADBE-9ED29438F751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{2B98D812-9F41-4F13-B779-8E0D91E8E938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{2B98D812-9F41-4F13-B779-8E0D91E8E938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeInvestimentos.Site", "ControleDeInvestimentos.Site\ControleDeInvestimentos.Site.csproj", "{3BB985BB-F79D-4214-9E33-BD61F7411FCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControleDeInvestimentos.Site", "ControleDeInvestimentos.Site\ControleDeInvestimentos.Site.csproj", "{3BB985BB-F79D-4214-9E33-BD61F7411FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeInvestimentos.WebAPI", "ControleDeInvestimentos.WebAPI\ControleDeInvestimentos.WebAPI.csproj", "{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Domínio", "0 - Domínio", "{375CFA46-53F3-4533-86DA-53A52D20FC4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Aplicação", "1 - Aplicação", "{038F1D71-103A-4CE2-B4A0-F221C93817EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Repositório", "2 - Repositório", "{B9BE861E-5EF5-4A21-9865-011826F675D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Web API", "3 - Web API", "{F99F5E7E-4313-4F28-92C7-04B664FF4118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +43,20 @@ Global
 		{3BB985BB-F79D-4214-9E33-BD61F7411FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BB985BB-F79D-4214-9E33-BD61F7411FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BB985BB-F79D-4214-9E33-BD61F7411FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A115D13D-FACE-43A0-B683-B309B8289917} = {B9BE861E-5EF5-4A21-9865-011826F675D9}
+		{51DF5964-4D12-427C-ADBE-9ED29438F751} = {038F1D71-103A-4CE2-B4A0-F221C93817EB}
+		{2B98D812-9F41-4F13-B779-8E0D91E8E938} = {375CFA46-53F3-4533-86DA-53A52D20FC4D}
+		{3BB985BB-F79D-4214-9E33-BD61F7411FCE} = {F99F5E7E-4313-4F28-92C7-04B664FF4118}
+		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31} = {F99F5E7E-4313-4F28-92C7-04B664FF4118}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C9F0605-0EDF-41AF-B92A-A207D41C949D}

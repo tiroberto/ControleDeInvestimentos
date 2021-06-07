@@ -41,13 +41,21 @@ namespace ControleDeInvestimentos.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Cadastrar(Investimento investimento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                appInvestimento.Salvar(investimento);
-                return RedirectToAction("Index");
-            }            
-            //TipoInvestimentoAplicacao appTipoInvestimento = new TipoInvestimentoAplicacao();
-            return View(investimento);
+                if (ModelState.IsValid)
+                {
+                    appInvestimento.Salvar(investimento);
+                    return RedirectToAction("Index");
+                }
+                //TipoInvestimentoAplicacao appTipoInvestimento = new TipoInvestimentoAplicacao();
+                return View(investimento);
+            }
+            catch
+            {                
+                return RedirectToAction("Cadastrar");
+            }
+            
         }
 
         public IActionResult Editar(int id)
@@ -62,12 +70,19 @@ namespace ControleDeInvestimentos.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(Investimento investimento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                appInvestimento.Salvar(investimento);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    appInvestimento.Salvar(investimento);
+                    return RedirectToAction("Index");
+                }
+                return View(investimento);
             }
-            return View(investimento);
+            catch
+            {
+                return RedirectToAction("Editar",investimento);
+            }            
         }
 
         public IActionResult Detalhes(int id)
@@ -90,8 +105,15 @@ namespace ControleDeInvestimentos.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ExcluirConfirmado(int id)
         {
-            appInvestimento.Excluir(id);
-            return RedirectToAction("Index");
+            try
+            {
+                appInvestimento.Excluir(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Excluir",id);
+            }            
         }
     }
 }
