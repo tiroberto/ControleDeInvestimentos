@@ -13,9 +13,12 @@
         <form asp-action="Cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label>Nome</label>
-                @Html.EditorFor(Model => Model.Nome)
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <label>Investimento</label>
+                @Html.DropDownListFor(Model => Model.InvestimentoUnico.TodosInvestimentosId,
+                     new SelectList(ViewBag.listaInvestimentos,
+                     "TodosInvestimentosId",
+                     "Nome"),
+                     "---Selecione---")
             </div>
             <div class="form-group">
                 <label>Valor total</label>
@@ -31,14 +34,6 @@
                 <label>Quantidade</label>
                 @Html.EditorFor(Model => Model.Quantidade)
                 <span asp-validation-for="Quantidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Tipo do investimento</label>
-                @Html.DropDownListFor(Model => Model.TipoInvestimento.TipoInvestimentoId,
-                     new SelectList(ViewBag.listaTipoInvestimento,
-                     "TipoInvestimentoId",
-                     "Nome"),
-                     "---Selecione---")
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

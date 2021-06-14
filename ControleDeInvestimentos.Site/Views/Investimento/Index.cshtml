@@ -4,6 +4,17 @@
     ViewBag.Title = "Lista de investimentos";
 }
 
+<style>
+    table{
+        margin:auto;
+        border:solid;
+    }
+    td,th{
+        margin:auto;
+        border:solid;
+    }
+</style>
+
 <h2>Lista de Investimentos</h2>
 
 <p>@Html.ActionLink("Novo investimento", "Cadastrar")</p>
@@ -11,21 +22,23 @@
 <table>
     <thead>
         <tr>
-            <th>Nome</th>
+            <th>Nome</th> 
             <th>Tipo de investimento</th>
             <th>Preço médio</th>
             <th>Quantidade</th>
             <th>Valor total</th>
+            <th>Carteira</th>
         </tr>
     </thead>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.TipoInvestimento.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.PrecoMedio)</td>
-            <td>@Html.DisplayFor(modelitem => item.Quantidade)</td>
-            <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+            <td>@Html.DisplayFor(modelItem => item.InvestimentoUnico.Nome)</td> 
+            <td>@Html.DisplayFor(modelItem => item.InvestimentoUnico.TipoInvestimento.Nome)</td> 
+            <td>@Html.DisplayFor(modelItem => item.PrecoMedio)</td> 
+            <td>@Html.DisplayFor(modelitem => item.Quantidade)</td> 
+            <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>            
+            <td>@Html.DisplayFor(modelItem => item.Carteira.Nome)</td>              
             <td>
                 @Html.ActionLink("Editar", "Editar", new { id = item.InvestimentoId }) |
                 @Html.ActionLink("Detalhes", "Detalhes", new { id = item.InvestimentoId }) |

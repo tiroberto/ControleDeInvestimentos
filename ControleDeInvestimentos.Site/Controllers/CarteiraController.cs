@@ -52,7 +52,7 @@ namespace ControleDeInvestimentos.Site.Controllers
             }
             catch
             {
-                return RedirectToAction("Cadastrar", carteira);
+                return RedirectToAction("Cadastrar");
             }
         }
 
@@ -75,7 +75,7 @@ namespace ControleDeInvestimentos.Site.Controllers
             }
             catch
             {
-                return RedirectToAction("Editar", carteira);
+                return RedirectToAction("Editar", carteira.CarteiraId);
             }
         }
 
@@ -99,6 +99,34 @@ namespace ControleDeInvestimentos.Site.Controllers
             catch
             {
                 return RedirectToAction("Excluir", id);
+            }
+        }
+
+        // GET
+        public ActionResult AdicionarInvestimento(int id)
+        {
+            TodosInvestimentosAplicacao appTodosInvestimentos = new TodosInvestimentosAplicacao();
+
+            var carteiraAddInvest = appCarteira.ListarPorId(id);
+            ViewBag.listaInvestimentos = appTodosInvestimentos.Listar();
+
+            return View(carteiraAddInvest);
+        }
+
+        // POST
+        [HttpPost, ActionName("AdicionarInvestimento")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdicionarInvestimentoConfirmar(Investimento investimento)
+        {
+            InvestimentoAplicacao appInvestimento = new InvestimentoAplicacao();
+            try
+            {
+                appInvestimento.Salvar(investimento);
+                return RedirectToAction("Detalhes", investimento.Carteira.CarteiraId);
+            }
+            catch
+            {
+                return RedirectToAction("AdicionarCarteira", investimento.Carteira.CarteiraId);
             }
         }
     }

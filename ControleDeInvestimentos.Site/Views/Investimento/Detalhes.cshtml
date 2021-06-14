@@ -4,46 +4,50 @@
     ViewData["Title"] = "Detalhes";
 }
 
+<style>
+ 
+</style>
+
 <h1>Detalhes</h1>
 
 <div>
     <h4>Investimento</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Id
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.InvestimentoId)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Nome
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.InvestimentoUnico.Nome)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Tipo do investimento
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoInvestimento.Nome)
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.InvestimentoUnico.TipoInvestimento.Nome)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Valor total
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.ValorTotal)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Preço médio
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.PrecoMedio)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Quantidade
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Quantidade)
         </dd>
     </dl>

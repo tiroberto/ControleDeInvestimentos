@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Aplicacao.NotificationPattern;
+using Dominio;
 using Repositorio;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,34 @@ namespace Aplicacao
             _repositorio = new TipoInvestimentoRepositorio();
         }
 
-        public void Salvar(TipoInvestimento tipoInvestimento)
+        public NotificationResult Salvar(TipoInvestimento tipoInvestimento)
         {
-            _repositorio.Salvar(tipoInvestimento);
+            var notificationResult = new NotificationResult();
+
+            try
+            {
+                if (notificationResult.IsValid)
+                {
+                    if (tipoInvestimento.TipoInvestimentoId == 0)
+                    {
+                        _repositorio.Adicionar(tipoInvestimento);
+                        notificationResult.Add("Investimento cadastrado com sucesso.");
+                    }
+                    else
+                    {
+                        _repositorio.Alterar(tipoInvestimento);
+                        notificationResult.Add("Investimento atualizado com sucesso.");
+                    }
+                }
+
+                notificationResult.Result = tipoInvestimento;
+
+                return notificationResult;
+            }
+            catch (Exception ex)
+            {
+                return notificationResult.Add(new NotificationError(ex.Message));
+            }
         }
 
         public void Excluir(int id)

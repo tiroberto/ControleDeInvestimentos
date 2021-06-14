@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
+using Dominio.Entidades;
 
 namespace Repositorio.Configuracoes
 {
@@ -15,17 +16,16 @@ namespace Repositorio.Configuracoes
         {
             builder.ToTable("investimento", "controledeinvestimentos");
             builder.HasKey("InvestimentoId");
-            builder.Property(i => i.Nome)
-                .IsRequired()
-                .HasMaxLength(70)
-                .HasColumnType("Nome");
             builder.Property(i => i.PrecoMedio)
                 .HasColumnName("PrecoMedio");
             builder.Property(i => i.Quantidade)
                 .HasColumnName("Quantidade");
             builder.Property(i => i.ValorTotal)
                 .HasColumnName("ValorTotal");
-            builder.HasOne(t => t.TipoInvestimento)
+            builder.HasOne(t => t.InvestimentoUnico)
+                .WithOne(i => i.InvestimentoUnico)
+                .HasForeignKey<TodosInvestimentos>(ti => ti.TodosInvestimentosId);
+            builder.HasOne(c => c.Carteira)
                 .WithMany(i => i.Investimentos);
         }
     }
