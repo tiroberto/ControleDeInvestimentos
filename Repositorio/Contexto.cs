@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 using Repositorio.Configuracoes;
@@ -15,7 +16,8 @@ namespace Repositorio
         public DbSet<Investimento> Investimentos { get; set; }
         public DbSet<TipoInvestimento> TiposdeInvestimento { get; set; }
         public DbSet<Carteira> Carteiras { get; set; }
-        public DbSet<InvestimentoCarteira> InvestimentoCarteiras { get; set; }
+        public DbSet<TodosInvestimentos> TodosInvestimentos { get; set; }
+        //public DbSet<InvestimentoCarteira> InvestimentoCarteiras { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,7 +29,7 @@ namespace Repositorio
         {
             modelBuilder.ApplyConfiguration(new InvestimentoConfiguracao());
             modelBuilder.ApplyConfiguration(new CarteiraConfiguracao());
-            modelBuilder.ApplyConfiguration(new InvestimentoCarteiraConfiguracao());
+            //modelBuilder.ApplyConfiguration(new InvestimentoCarteiraConfiguracao());
             modelBuilder.ApplyConfiguration(new TipoInvestimentoConfiguracao());
         }
 

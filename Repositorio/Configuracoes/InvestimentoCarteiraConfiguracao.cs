@@ -13,12 +13,14 @@ namespace Repositorio.Configuracoes
     {
         public void Configure(EntityTypeBuilder<InvestimentoCarteira> builder)
         {
-            builder.ToTable("investimento_carteira", "controledeinvestimentos");
+            /*builder.ToTable("investimento_carteira", "controledeinvestimentos");
             builder.HasKey(ic => new { ic.InvestimentoId, ic.CarteiraId });
             builder.HasOne(i => i.Investimento)
-                .WithMany(c => c.InvestimentoCarteiras);
+                .WithMany(c => c.InvestimentoCarteiras)
+                .HasForeignKey(d => d.InvestimentoId);
             builder.HasOne(c => c.Carteira)
-                .WithMany(i => i.InvestimentoCarteiras);
+                .WithMany(i => i.InvestimentoCarteiras)
+                .HasForeignKey(d => d.CarteiraId);*/
         }
     }
 }

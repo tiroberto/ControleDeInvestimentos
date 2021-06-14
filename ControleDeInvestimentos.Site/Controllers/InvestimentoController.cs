@@ -17,23 +17,18 @@ namespace ControleDeInvestimentos.Site.Controllers
         {
             appInvestimento = new InvestimentoAplicacao();
         }
-
+        
+        // GET
         public IActionResult Index()
         {
             var listaInvestimentos = appInvestimento.Listar();
             return View(listaInvestimentos);
         }
-
+        
         public IActionResult Cadastrar()
         {
-            TipoInvestimentoAplicacao appTipoInvestimento = new TipoInvestimentoAplicacao();
-            /*ViewBag.listaTipoInvestimento = new SelectList
-                (
-                    appTipoInvestimento.Listar(),
-                    "TipoInvestimentoId",
-                    "Nome"
-                );*/
-            ViewBag.listaTipoInvestimento = appTipoInvestimento.Listar();
+            TodosInvestimentosAplicacao appTodosInvestimentos = new TodosInvestimentosAplicacao();
+            ViewBag.listaInvestimentos = appTodosInvestimentos.Listar();
             return View();
         }
 
@@ -81,7 +76,7 @@ namespace ControleDeInvestimentos.Site.Controllers
             }
             catch
             {
-                return RedirectToAction("Editar",investimento);
+                return RedirectToAction("Editar",investimento.InvestimentoId);
             }            
         }
 
@@ -95,10 +90,10 @@ namespace ControleDeInvestimentos.Site.Controllers
 
         public IActionResult Excluir(int id)
         {
-            var investimentoDetalhes = appInvestimento.ListarPorId(id);
-            if (investimentoDetalhes == null)
+            var investimentoExcluir = appInvestimento.ListarPorId(id);
+            if (investimentoExcluir == null)
                 return NotFound();
-            return View(investimentoDetalhes);
+            return View(investimentoExcluir);
         }
 
         [HttpPost, ActionName("Excluir")]
@@ -115,5 +110,37 @@ namespace ControleDeInvestimentos.Site.Controllers
                 return RedirectToAction("Excluir",id);
             }            
         }
+
+        //// GET
+        //public ActionResult AdicionarInvestimento(string CarteiraId)
+        //{
+        //    TodosInvestimentosAplicacao appTodosInvestimentos = new TodosInvestimentosAplicacao();
+        //    CarteiraAplicacao appCarteira = new CarteiraAplicacao();            
+
+        //    var Carteira = appCarteira.ListarPorId(Convert.ToInt32(CarteiraId));
+        //    ViewBag.listaInvestimentos = appTodosInvestimentos.Listar();
+
+        //    return View();
+        //}
+
+        //// POST
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AdicionarInvestimentoConfirmar(int CarteiraId, int TodosInvestimentosId)
+        //{
+        //    //int investimentoId = Convert.ToInt32(InvestimentoId);
+        //    //int carteiraId = Convert.ToInt32(CarteiraId);
+
+        //    try
+        //    {
+        //        CarteiraAplicacao appCarteira = new CarteiraAplicacao();
+        //        appCarteira.AdicionarInvestimento(TodosInvestimentosId, CarteiraId);
+        //        return RedirectToAction("Detalhes", CarteiraId);
+        //    }
+        //    catch
+        //    {
+        //        return RedirectToAction("AdicionarCarteira", CarteiraId);
+        //    }
+        //}
     }
 }

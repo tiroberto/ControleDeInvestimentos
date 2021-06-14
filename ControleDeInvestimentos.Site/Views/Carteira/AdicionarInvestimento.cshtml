@@ -1,0 +1,62 @@
+﻿@model Dominio.Carteira
+
+@{
+    ViewData["Title"] = "AdicionarInvestimento";
+    Dominio.Investimento investimento = new Dominio.Investimento();
+}
+
+<h1>Adicionar novo investimento</h1>
+
+<h4>Carteira <b>@Model.Nome</b></h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdicionarInvestimento">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarteiraId" />
+            <div class="form-group">
+                <label class="control-label">Investimento</label>
+                <select name="TodosInvestimentosId" id="TodosInvestimentosId">
+                    <option>--Selecione--</option>
+                    @foreach (var item in ViewBag.listaInvestimentos)
+                    {
+                        <option name="@item.Nome" id="@item.Nome" value="@item.TodosInvestimentosId">
+                            @item.Nome
+                        </option>
+                    }
+                </select>
+                @Html.DropDownList("TodosInvestimentosId",
+                     new SelectList(ViewBag.listaTipoInvestimento,
+                     "TodosInvestimentosId",
+                     "Nome"),
+                     "---Selecione---")
+            </div>
+            <div class="form-group">
+                <label class="control-label">Valor total</label>
+                <input asp-for="@investimento.ValorTotal" class="form-control" />
+                <span asp-validation-for="@investimento.ValorTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Preço médio</label>
+                <input asp-for="@investimento.PrecoMedio" class="form-control" />
+                <span asp-validation-for="@investimento.PrecoMedio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Quantidade</label>
+                <input asp-for="@investimento.Quantidade" class="form-control" />
+                <span asp-validation-for="@investimento.Quantidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

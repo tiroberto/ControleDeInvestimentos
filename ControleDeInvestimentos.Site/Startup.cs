@@ -51,6 +51,11 @@ namespace ControleDeInvestimentos.Site
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name:"AdicionarInvestimento",
+                //    pattern: "Investimento/{*AdicionarInvestimento}",
+                //    defaults: new {controller = "Investimento", action = "AdicionarInvestimento"}
+                //    );
             });
         }
     }

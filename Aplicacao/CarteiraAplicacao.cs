@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Aplicacao.NotificationPattern;
+using Dominio;
 using Repositorio;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,39 @@ namespace Aplicacao
             _repositorio = new CarteiraRepositorio();
         }
 
-        public void Salvar(Carteira carteira)
+        public NotificationResult Salvar(Carteira carteira)
         {
-            _repositorio.Salvar(carteira);
+            var notificationResult = new NotificationResult();
+
+            try
+            {
+                if (notificationResult.IsValid)
+                {
+                    if (carteira.CarteiraId == 0)
+                    {
+                        _repositorio.Adicionar(carteira);
+                        notificationResult.Add("Carteira cadastrado com sucesso.");
+                    }
+                    else
+                    {
+                        _repositorio.Alterar(carteira);
+                        notificationResult.Add("Carteira atualizado com sucesso.");
+                    }
+                }
+
+                notificationResult.Result = carteira;
+
+                return notificationResult;
+            }
+            catch (Exception ex)
+            {
+                return notificationResult.Add(new NotificationError(ex.Message));
+            }
         }
 
-        public void Excluir(int id)
+        public string Excluir(int id)
         {
-            _repositorio.Excluir(id);
+            return _repositorio.Excluir(id);
         }
 
         public IEnumerable<Carteira> Listar()
@@ -36,5 +62,10 @@ namespace Aplicacao
         {
             return _repositorio.ListarPorId(id);
         }
+
+        //public void AdicionarInvestimento(Investimento investimento)
+        //{
+        //    _repositorio.AdicionarInvestimento(investimento);
+        //}
     }
 }

@@ -16,23 +16,23 @@
         </dd>
         <dt class="col-sm-2">Investimentos</dt>
         <dl class="col-sm-10">
-            @foreach (var investimento in Model.InvestimentoCarteiras)
+            @foreach (var investimento in Model.Investimentos)
             {
                 <dl class="col-sm-10">
                     <dd class="col-sm-10">
-                        Nome: @Html.DisplayFor(item => investimento.Investimento.Nome)
+                        Nome: @Html.DisplayFor(item => investimento.InvestimentoUnico.Nome)
                     </dd>
                     <dd class="col-sm-10">
-                        Preço médio: @Html.DisplayFor(item => investimento.Investimento.PrecoMedio)
+                        Preço médio: @Html.DisplayFor(item => investimento.PrecoMedio)
                     </dd>
                     <dd class="col-sm-10">
-                        Valor total: @Html.DisplayFor(item => investimento.Investimento.ValorTotal)
+                        Valor total: @Html.DisplayFor(item => investimento.ValorTotal)
                     </dd>
                     <dd class="col-sm-10">
-                        Quantidade: @Html.DisplayFor(item => investimento.Investimento.Quantidade)
+                        Quantidade: @Html.DisplayFor(item => investimento.Quantidade)
                     </dd>
                     <dd class="col-sm-10">
-                        Tipo do investimento: @Html.DisplayFor(item => investimento.Investimento.TipoInvestimento.Nome)
+                        Tipo do investimento: @Html.DisplayFor(item => investimento.InvestimentoUnico.TipoInvestimento.Nome)
                     </dd>
                 </dl>
                 <hr />
@@ -41,6 +41,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Editar", "Editar", new { id = @Model.CarteiraId }) |
+    @Html.ActionLink("Editar", "Editar", new { id = @Model.CarteiraId }) |    
+    @Html.ActionLink("Adicionar investimento", "AdicionarInvestimento", new { id = Model.CarteiraId }) |
     <a asp-action="Index">Voltar à lista</a>
 </div>

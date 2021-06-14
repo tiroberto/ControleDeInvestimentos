@@ -12,13 +12,10 @@
     <div class="col-md-4">
         <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.HiddenFor(Model => Model.TipoInvestimento.TipoInvestimentoId)
-            @Html.HiddenFor(Model => Model.InvestimentoCarteiras)
-            @Html.HiddenFor(Model => Model.InvestimentoId)
+            <input type="hidden" asp-for="InvestimentoId" />
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" value="@Model.Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <p>Carteira <b>@Model.Carteira.Nome</b></p>
+                <p>@Model.InvestimentoUnico.Nome | @Model.InvestimentoUnico.Ticket</p>                
             </div>
             <div class="form-group">
                 <label asp-for="ValorTotal" class="control-label"></label>
@@ -43,7 +40,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar à lista</a>
 </div>
 
 @section Scripts {

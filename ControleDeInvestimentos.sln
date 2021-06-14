@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControleDeInvestimentos.Site", "ControleDeInvestimentos.Site\ControleDeInvestimentos.Site.csproj", "{3BB985BB-F79D-4214-9E33-BD61F7411FCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeInvestimentos.WebAPI", "ControleDeInvestimentos.WebAPI\ControleDeInvestimentos.WebAPI.csproj", "{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControleDeInvestimentos.WebAPI", "ControleDeInvestimentos.WebAPI\ControleDeInvestimentos.WebAPI.csproj", "{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Domínio", "0 - Domínio", "{375CFA46-53F3-4533-86DA-53A52D20FC4D}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Repositório", "2 - Repositório", "{B9BE861E-5EF5-4A21-9865-011826F675D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Web API", "3 - Web API", "{F99F5E7E-4313-4F28-92C7-04B664FF4118}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{AB9DA00A-0107-4A49-99FF-C32D3C9DE498}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9DA00A-0107-4A49-99FF-C32D3C9DE498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9DA00A-0107-4A49-99FF-C32D3C9DE498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9DA00A-0107-4A49-99FF-C32D3C9DE498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9DA00A-0107-4A49-99FF-C32D3C9DE498}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{2B98D812-9F41-4F13-B779-8E0D91E8E938} = {375CFA46-53F3-4533-86DA-53A52D20FC4D}
 		{3BB985BB-F79D-4214-9E33-BD61F7411FCE} = {F99F5E7E-4313-4F28-92C7-04B664FF4118}
 		{9DBB1E7B-6BAC-437F-AC38-B87C1EA30F31} = {F99F5E7E-4313-4F28-92C7-04B664FF4118}
+		{AB9DA00A-0107-4A49-99FF-C32D3C9DE498} = {F99F5E7E-4313-4F28-92C7-04B664FF4118}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C9F0605-0EDF-41AF-B92A-A207D41C949D}
