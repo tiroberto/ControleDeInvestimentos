@@ -11,6 +11,6 @@ namespace Dominio
     {
         public int TipoInvestimentoId { get; set; }
         public string Nome { get; set; }
-        public virtual IEnumerable<TodosInvestimentos> Investimentos { get; set; }
+        public IEnumerable<TodosInvestimentos> Investimentos { get; set; }
     }
 }

@@ -18,6 +18,11 @@ namespace Aplicacao
             _repositorio = new CarteiraRepositorio();
         }
 
+        public int ListarQuantidadeInvestimentos(int id)
+        {
+            return _repositorio.ListarQuantidadeInvestimentos(id);
+        }
+        
         public NotificationResult Salvar(Carteira carteira)
         {
             var notificationResult = new NotificationResult();
@@ -63,9 +68,25 @@ namespace Aplicacao
             return _repositorio.ListarPorId(id);
         }
 
-        //public void AdicionarInvestimento(Investimento investimento)
-        //{
-        //    _repositorio.AdicionarInvestimento(investimento);
-        //}
+        public NotificationResult AdicionarInvestimento(Investimento investimento)
+        {
+            var notificationResult = new NotificationResult();
+
+            try
+            {
+                if (notificationResult.IsValid)
+                {
+                    _repositorio.AdicionarInvestimento(investimento);
+                }
+
+                notificationResult.Result = investimento;
+
+                return notificationResult;
+            }
+            catch (Exception ex)
+            {
+                return notificationResult.Add(new NotificationError(ex.Message));
+            }
+        }
     }
 }

@@ -40,11 +40,12 @@ namespace Repositorio
             _contexto.SaveChanges();
         }
 
-        public void Excluir(int id)
+        public string Excluir(int id)
         {
             TipoInvestimento tipoInvestimentoExcluir = _contexto.TiposdeInvestimento.First(x => x.TipoInvestimentoId == id);
             _contexto.TiposdeInvestimento.Remove(tipoInvestimentoExcluir);
             _contexto.SaveChanges();
+            return "Excluído com sucesso!";
         }
     }
 }

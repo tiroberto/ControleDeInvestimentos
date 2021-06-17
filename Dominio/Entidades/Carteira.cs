@@ -10,6 +10,6 @@ namespace Dominio
     {
         public int CarteiraId { get; set; }
         public string Nome { get; set; }
-        public virtual IEnumerable<Investimento> Investimentos { get; set; }
+        public IEnumerable<Investimento> Investimentos { get; set; }
     }
 }

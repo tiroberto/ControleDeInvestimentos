@@ -1,6 +1,7 @@
 ﻿using Aplicacao.NotificationPattern;
 using Dominio;
-using Repositorio;
+using Dominio.Entidades;
+using Repositorio.RepositorioEF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Aplicacao
 {
-    public class TipoInvestimentoAplicacao
+    public class EnderecoAplicacao
     {
-        private readonly TipoInvestimentoRepositorio _repositorio;
+        private readonly EnderecoRepositorio _repositorio;
 
-        public TipoInvestimentoAplicacao()
+        public EnderecoAplicacao()
         {
-            _repositorio = new TipoInvestimentoRepositorio();
+            _repositorio = new EnderecoRepositorio();
         }
 
-        public NotificationResult Salvar(TipoInvestimento tipoInvestimento)
+        public NotificationResult Salvar(Endereco endereco)
         {
             var notificationResult = new NotificationResult();
 
@@ -26,19 +27,19 @@ namespace Aplicacao
             {
                 if (notificationResult.IsValid)
                 {
-                    if (tipoInvestimento.TipoInvestimentoId == 0)
+                    if (endereco.EnderecoId == 0)
                     {
-                        _repositorio.Adicionar(tipoInvestimento);
-                        notificationResult.Add("Investimento cadastrado com sucesso.");
+                        _repositorio.Adicionar(endereco);
+                        notificationResult.Add("Endereço cadastrado com sucesso.");
                     }
                     else
                     {
-                        _repositorio.Alterar(tipoInvestimento);
-                        notificationResult.Add("Investimento atualizado com sucesso.");
+                        _repositorio.Alterar(endereco);
+                        notificationResult.Add("Endereço atualizado com sucesso.");
                     }
                 }
 
-                notificationResult.Result = tipoInvestimento;
+                notificationResult.Result = endereco;
 
                 return notificationResult;
             }
@@ -53,12 +54,12 @@ namespace Aplicacao
             return _repositorio.Excluir(id);
         }
 
-        public IEnumerable<TipoInvestimento> Listar()
+        public IEnumerable<Endereco> Listar()
         {
             return _repositorio.Listar();
         }
 
-        public TipoInvestimento ListarPorId(int id)
+        public Endereco ListarPorId(int id)
         {
             return _repositorio.ListarPorId(id);
         }

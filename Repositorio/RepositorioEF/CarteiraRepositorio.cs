@@ -17,6 +17,15 @@ namespace Repositorio
             _contexto = new Contexto();
         }
 
+        public int ListarQuantidadeInvestimentos(int id)
+        {
+            var carteira = _contexto.Carteiras
+                .Include(ic => ic.Investimentos)
+                .ThenInclude(c => c.InvestimentoUnico.TipoInvestimento)
+                .First(x => x.CarteiraId == id);
+            return carteira.Investimentos.ToList().Count();
+        }
+
         public IEnumerable<Carteira> Listar()
         {
             //return    View(_context.Courses
@@ -36,16 +45,11 @@ namespace Repositorio
                 .First(x => x.CarteiraId == id);
         }
 
-        //public void AdicionarInvestimento(Investimento investimento)
-        //{
-        //    var data = new InvestimentoCarteira
-        //    {
-        //        InvestimentoId = investimento.InvestimentoId,
-        //        CarteiraId = investimento.Carteira.CarteiraId
-        //    };            
-        //    _contexto.Set<InvestimentoCarteira>().Add(data);
-        //    _contexto.SaveChanges();
-        //}
+        public void AdicionarInvestimento(Investimento investimento)
+        {
+            _contexto.Set<Investimento>().Add(investimento);
+            _contexto.SaveChanges();
+        }
 
         public void Adicionar(Carteira carteira)
         {
