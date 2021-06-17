@@ -1,6 +1,6 @@
 ﻿using Aplicacao.NotificationPattern;
-using Dominio;
-using Repositorio;
+using Dominio.Entidades;
+using Repositorio.RepositorioEF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Aplicacao
 {
-    public class TipoInvestimentoAplicacao
+    public class UsuarioAplicacao
     {
-        private readonly TipoInvestimentoRepositorio _repositorio;
+        private readonly UsuarioRepositorio _repositorio;
 
-        public TipoInvestimentoAplicacao()
+        public UsuarioAplicacao()
         {
-            _repositorio = new TipoInvestimentoRepositorio();
+            _repositorio = new UsuarioRepositorio();
         }
 
-        public NotificationResult Salvar(TipoInvestimento tipoInvestimento)
+        public NotificationResult Salvar(Usuario usuario)
         {
             var notificationResult = new NotificationResult();
 
@@ -26,19 +26,19 @@ namespace Aplicacao
             {
                 if (notificationResult.IsValid)
                 {
-                    if (tipoInvestimento.TipoInvestimentoId == 0)
+                    if (usuario.UsuarioId == 0)
                     {
-                        _repositorio.Adicionar(tipoInvestimento);
-                        notificationResult.Add("Investimento cadastrado com sucesso.");
+                        _repositorio.Adicionar(usuario);
+                        notificationResult.Add("Usuário cadastrado com sucesso.");
                     }
                     else
                     {
-                        _repositorio.Alterar(tipoInvestimento);
-                        notificationResult.Add("Investimento atualizado com sucesso.");
+                        _repositorio.Alterar(usuario);
+                        notificationResult.Add("Usuário atualizado com sucesso.");
                     }
                 }
 
-                notificationResult.Result = tipoInvestimento;
+                notificationResult.Result = usuario;
 
                 return notificationResult;
             }
@@ -53,12 +53,12 @@ namespace Aplicacao
             return _repositorio.Excluir(id);
         }
 
-        public IEnumerable<TipoInvestimento> Listar()
+        public IEnumerable<Usuario> Listar()
         {
             return _repositorio.Listar();
         }
 
-        public TipoInvestimento ListarPorId(int id)
+        public Usuario ListarPorId(int id)
         {
             return _repositorio.ListarPorId(id);
         }

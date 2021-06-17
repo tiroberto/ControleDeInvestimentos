@@ -13,11 +13,20 @@ namespace Repositorio
 {
     public class Contexto : DbContext
     {
+
         public DbSet<Investimento> Investimentos { get; set; }
         public DbSet<TipoInvestimento> TiposdeInvestimento { get; set; }
         public DbSet<Carteira> Carteiras { get; set; }
+
+        internal Usuario Include()
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<TodosInvestimentos> TodosInvestimentos { get; set; }
-        //public DbSet<InvestimentoCarteira> InvestimentoCarteiras { get; set; }
+        public DbSet<UsuarioEndereco> UsuarioEndereco { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,8 +38,10 @@ namespace Repositorio
         {
             modelBuilder.ApplyConfiguration(new InvestimentoConfiguracao());
             modelBuilder.ApplyConfiguration(new CarteiraConfiguracao());
-            //modelBuilder.ApplyConfiguration(new InvestimentoCarteiraConfiguracao());
             modelBuilder.ApplyConfiguration(new TipoInvestimentoConfiguracao());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguracao());
+            modelBuilder.ApplyConfiguration(new EnderecoConfiguracao());
+            modelBuilder.ApplyConfiguration(new UsuarioEnderecoConfiguracao());
         }
 
     }

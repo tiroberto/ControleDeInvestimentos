@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ControleDeInvestimentos.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class InvestimentoController : ControllerBase
     {
@@ -52,10 +52,10 @@ namespace ControleDeInvestimentos.WebAPI.Controllers
             return appInvestimento.Salvar(investimento);
         }
 
-        [HttpDelete]
-        public string Excluir(Investimento investimento)
+        [HttpDelete("excluir")]
+        public string Excluir(int id)
         {
-            return appInvestimento.Excluir(investimento.InvestimentoId);
+            return appInvestimento.Excluir(id);
         }
     }
 }

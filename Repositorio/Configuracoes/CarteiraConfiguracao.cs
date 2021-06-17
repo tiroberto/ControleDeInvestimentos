@@ -19,6 +19,9 @@ namespace Repositorio.Configuracoes
                 .IsRequired()
                 .HasMaxLength(70)
                 .HasColumnName("Nome");
+            builder.HasMany(c => c.Investimentos)
+                .WithOne(c => c.Carteira)
+                .HasForeignKey("CarteiraId");
         }
     }
 }
