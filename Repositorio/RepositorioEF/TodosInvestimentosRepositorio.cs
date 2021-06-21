@@ -17,33 +17,38 @@ namespace Repositorio.RepositorioEF
             _contexto = new Contexto();
         }
 
-        public IEnumerable<TodosInvestimentos> Listar()
+        public async Task<IEnumerable<TodosInvestimentos>> Listar()
         {
-            return _contexto.TodosInvestimentos
-                .Include(x => x.InvestimentoUnico)
+            return await _contexto.TodosInvestimentos
+                .Include(x => x.Investimentos)
                 .Include(c => c.TipoInvestimento)
-                .ToList();
+                .ToListAsync();
         }
 
         public TodosInvestimentos ListarPorId(int id)
         {
             return _contexto.TodosInvestimentos
-                .Include(j => j.InvestimentoUnico)
+                .Include(j => j.Investimentos)
                 .Include(c => c.TipoInvestimento)
                 .First(x => x.TodosInvestimentosId == id);
         }
 
         public void Adicionar(TodosInvestimentos todosInvestimentos)
         {
-            todosInvestimentos.TipoInvestimento = _contexto.TiposdeInvestimento.ToList().Where(x => x.TipoInvestimentoId == todosInvestimentos.TipoInvestimento.TipoInvestimentoId).FirstOrDefault();
+            todosInvestimentos.TipoInvestimento = _contexto.TiposdeInvestimento
+                .ToList()
+                .Where(x => x.TipoInvestimentoId == todosInvestimentos.TipoInvestimento.TipoInvestimentoId)
+                .FirstOrDefault();
             _contexto.TodosInvestimentos.Add(todosInvestimentos);
             _contexto.SaveChanges();
         }
 
         public void Alterar(TodosInvestimentos todosInvestimentos)
         {
-            todosInvestimentos.TipoInvestimento = _contexto.TiposdeInvestimento.ToList().Where(x => x.TipoInvestimentoId == todosInvestimentos.TipoInvestimento.TipoInvestimentoId).FirstOrDefault();
-            todosInvestimentos.InvestimentoUnico = _contexto.Investimentos.ToList().Where(x => x.InvestimentoId == todosInvestimentos.InvestimentoUnico.InvestimentoId).FirstOrDefault();
+            todosInvestimentos.TipoInvestimento = _contexto.TiposdeInvestimento
+                .ToList()
+                .Where(x => x.TipoInvestimentoId == todosInvestimentos.TipoInvestimento.TipoInvestimentoId)
+                .FirstOrDefault();
             _contexto.Update(todosInvestimentos);
             _contexto.SaveChanges();
         }
@@ -51,6 +56,7 @@ namespace Repositorio.RepositorioEF
         public string Excluir(int id)
         {
             TodosInvestimentos todosInvestimentosExcluir = _contexto.TodosInvestimentos.First(x => x.TodosInvestimentosId == id);
+            _contexto.Investimentos.RemoveRange(_contexto.Investimentos.Where(x => x.InvestimentoSelecionado.TodosInvestimentosId == id));
             _contexto.TodosInvestimentos.Remove(todosInvestimentosExcluir);
             _contexto.SaveChanges();
             return "Excluído com sucesso!";

@@ -22,11 +22,12 @@ namespace Repositorio.Configuracoes
                 .HasColumnName("Quantidade");
             builder.Property(i => i.ValorTotal)
                 .HasColumnName("ValorTotal");
-            builder.HasOne(t => t.InvestimentoUnico)
-                .WithOne(i => i.InvestimentoUnico)
-                .HasForeignKey<TodosInvestimentos>(ti => ti.TodosInvestimentosId);
+            builder.HasOne(t => t.InvestimentoSelecionado)
+                .WithMany(i => i.Investimentos)
+                .HasForeignKey("TodosInvestimentosId");
             builder.HasOne(c => c.Carteira)
-                .WithMany(i => i.Investimentos);
+                .WithMany(i => i.Investimentos)
+                .HasForeignKey("CarteiraId");
         }
     }
 }

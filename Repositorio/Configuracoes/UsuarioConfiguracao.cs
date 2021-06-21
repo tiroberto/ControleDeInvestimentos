@@ -26,8 +26,9 @@ namespace Repositorio.Configuracoes
                 .HasMaxLength(20)
                 .HasColumnName("Senha");
             builder.HasMany(i => i.Enderecos)
-                .WithOne(i => i.Usuario)
-                .HasForeignKey("EnderecoId");
+                .WithOne(i => i.Usuario);
+            builder.HasMany(i => i.Carteiras)
+                .WithOne(i => i.Usuario);
         }
     }
 }

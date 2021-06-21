@@ -22,7 +22,7 @@ namespace ControleDeInvestimentos.WebApp.Controllers
         }
 
         [HttpGet("listar")]
-        public IEnumerable<Usuario> Listar() => appUsuario.Listar();
+        public async Task<IEnumerable<Usuario>> Listar() => await appUsuario.Listar();
 
         [HttpGet("listarum")]
         [EnableCors]

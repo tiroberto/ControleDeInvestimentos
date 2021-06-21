@@ -18,7 +18,7 @@ namespace Repositorio.Configuracoes
             builder.HasKey("EnderecoId");
             builder.Property(e => e.Logradouro)
                 .HasMaxLength(70)
-                .HasColumnName("Nome");
+                .HasColumnName("Logradouro");
             builder.Property(e => e.Numero)
                 .HasColumnName("Numero");
             builder.Property(e => e.Bairro)
@@ -34,7 +34,8 @@ namespace Repositorio.Configuracoes
                 .HasMaxLength(2)
                 .HasColumnName("UFEstado");
             builder.HasOne(e => e.Usuario)
-                .WithMany(e => e.Enderecos);
+                .WithMany(e => e.Enderecos)
+                .HasForeignKey("UsuarioId");
         }
     }
 }

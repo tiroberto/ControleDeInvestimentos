@@ -13,7 +13,7 @@ namespace Dominio
         public decimal ValorTotal { get; set; }
         public decimal PrecoMedio { get; set; }
         public decimal Quantidade { get; set; }
-        public TodosInvestimentos InvestimentoUnico { get; set; }
+        public TodosInvestimentos InvestimentoSelecionado { get; set; }
         public Carteira Carteira { get; set; }
     }
 }

@@ -20,8 +20,10 @@ namespace Repositorio.Configuracoes
                 .HasMaxLength(70)
                 .HasColumnName("Nome");
             builder.HasMany(c => c.Investimentos)
-                .WithOne(c => c.Carteira)
-                .HasForeignKey("CarteiraId");
+                .WithOne(c => c.Carteira);
+            builder.HasOne(c => c.Usuario)
+                .WithMany(c => c.Carteiras)
+                .HasForeignKey("UsuarioId");
         }
     }
 }

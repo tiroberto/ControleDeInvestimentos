@@ -17,11 +17,11 @@ namespace Repositorio.RepositorioEF
             _contexto = new Contexto();
         }
 
-        public IEnumerable<Endereco> Listar()
+        public async Task<IEnumerable<Endereco>> Listar()
         {
-            return _contexto.Endereco
+            return await _contexto.Endereco
                 .Include(x=>x.Usuario)
-                .ToList();
+                .ToListAsync();
         }
 
         public Endereco ListarPorId(int id)
@@ -34,7 +34,9 @@ namespace Repositorio.RepositorioEF
         public void Adicionar(Endereco endereco)
         {
             endereco.Usuario = _contexto.Usuario
-                .ToList().Where(x => x.UsuarioId == endereco.EnderecoId).FirstOrDefault();
+                .ToList()
+                .Where(x => x.UsuarioId == endereco.Usuario.UsuarioId)
+                .FirstOrDefault();
             _contexto.Endereco.Add(endereco);
             _contexto.SaveChanges();
         }

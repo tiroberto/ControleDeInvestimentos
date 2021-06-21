@@ -29,7 +29,7 @@ namespace ControleDeInvestimentos.WebAPI.Controllers
         }
 
         [HttpGet("listar")]
-        public IEnumerable<Carteira> Listar() => appCarteira.Listar();
+        public async Task<IEnumerable<Carteira>> Listar() => await appCarteira.Listar();
 
         [HttpGet("listarum")]
         [EnableCors]

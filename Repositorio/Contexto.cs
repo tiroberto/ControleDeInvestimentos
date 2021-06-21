@@ -24,7 +24,6 @@ namespace Repositorio
         }
 
         public DbSet<TodosInvestimentos> TodosInvestimentos { get; set; }
-        public DbSet<UsuarioEndereco> UsuarioEndereco { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
 
@@ -40,8 +39,8 @@ namespace Repositorio
             modelBuilder.ApplyConfiguration(new CarteiraConfiguracao());
             modelBuilder.ApplyConfiguration(new TipoInvestimentoConfiguracao());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguracao());
+            modelBuilder.ApplyConfiguration(new TodosInvestimentosConfiguracao());
             modelBuilder.ApplyConfiguration(new EnderecoConfiguracao());
-            modelBuilder.ApplyConfiguration(new UsuarioEnderecoConfiguracao());
         }
 
     }

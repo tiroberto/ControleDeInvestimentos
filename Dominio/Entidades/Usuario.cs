@@ -13,5 +13,6 @@ namespace Dominio.Entidades
         public string Email { get; set; }
         public string Senha { get; set; }
         public IEnumerable<Endereco> Enderecos { get; set; }
+        public IEnumerable<Carteira> Carteiras { get; set; }
     }
 }

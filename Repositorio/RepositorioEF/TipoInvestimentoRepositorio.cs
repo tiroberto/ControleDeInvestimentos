@@ -17,14 +17,15 @@ namespace Repositorio
             _contexto = new Contexto();
         }
 
-        public IEnumerable<TipoInvestimento> Listar()
+        public async Task<IEnumerable<TipoInvestimento>> Listar()
         {
-            return _contexto.TiposdeInvestimento.ToList();
+            return await _contexto.TiposdeInvestimento
+                .ToListAsync();
         }
 
         public TipoInvestimento ListarPorId(int id)
         {
-            return _contexto.TiposdeInvestimento.Find(id);
+            return _contexto.TiposdeInvestimento.First(x => x.TipoInvestimentoId == id);
         }
 
         public void Adicionar(TipoInvestimento tipoInvestimento)
@@ -43,6 +44,7 @@ namespace Repositorio
         public string Excluir(int id)
         {
             TipoInvestimento tipoInvestimentoExcluir = _contexto.TiposdeInvestimento.First(x => x.TipoInvestimentoId == id);
+            _contexto.TodosInvestimentos.RemoveRange(_contexto.TodosInvestimentos.Where(x => x.TipoInvestimento.TipoInvestimentoId == id));
             _contexto.TiposdeInvestimento.Remove(tipoInvestimentoExcluir);
             _contexto.SaveChanges();
             return "Excluído com sucesso!";
