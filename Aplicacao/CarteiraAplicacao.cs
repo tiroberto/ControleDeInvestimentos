@@ -58,9 +58,9 @@ namespace Aplicacao
             return _repositorio.Excluir(id);
         }
 
-        public IEnumerable<Carteira> Listar()
+        public async Task<IEnumerable<Carteira>> Listar()
         {
-            return _repositorio.Listar();
+            return await _repositorio.Listar();
         }
 
         public Carteira ListarPorId(int id)

@@ -21,27 +21,25 @@ namespace Repositorio
         {
             var carteira = _contexto.Carteiras
                 .Include(ic => ic.Investimentos)
-                .ThenInclude(c => c.InvestimentoUnico.TipoInvestimento)
+                .ThenInclude(c => c.InvestimentoSelecionado.TipoInvestimento)
                 .First(x => x.CarteiraId == id);
             return carteira.Investimentos.ToList().Count();
         }
 
-        public IEnumerable<Carteira> Listar()
+        public async Task<IEnumerable<Carteira>> Listar()
         {
-            //return    View(_context.Courses
-            //          .Include(c => c.CourseLecturers)
-            //          .ThenInclude(cl => cl.Lecturers)); 
-            return _contexto.Carteiras
+            return await _contexto.Carteiras
                 .Include(i => i.Investimentos)
-                .ThenInclude(c => c.InvestimentoUnico.TipoInvestimento)
-                .ToList();
+                .ThenInclude(c => c.InvestimentoSelecionado.TipoInvestimento)
+                .ToListAsync();
         }
 
         public Carteira ListarPorId(int id)
         {
             return _contexto.Carteiras
+                .Include(x => x.Usuario)
                 .Include(ic => ic.Investimentos)
-                .ThenInclude(c => c.InvestimentoUnico.TipoInvestimento)
+                .ThenInclude(c => c.InvestimentoSelecionado.TipoInvestimento)
                 .First(x => x.CarteiraId == id);
         }
 
@@ -53,7 +51,11 @@ namespace Repositorio
 
         public void Adicionar(Carteira carteira)
         {
-            //carteira.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
+            carteira.Usuario = _contexto.Usuario
+                .Include(x => x.Enderecos)
+                .ToList()
+                .Where(x => x.UsuarioId == carteira.Usuario.UsuarioId)
+                .FirstOrDefault();
             _contexto.Carteiras.Add(carteira);
             _contexto.SaveChanges();
         }
@@ -61,7 +63,6 @@ namespace Repositorio
         public void Alterar(Carteira carteira)
         {
             Carteira carteiraSalvar = _contexto.Carteiras.Where(x => x.CarteiraId == carteira.CarteiraId).First();
-            //carteiraSalvar.Investimentos = carteira.Investimentos.Select(investimento => _contexto.Investimentos.FirstOrDefault(x => x.InvestimentoId == investimento.InvestimentoId)).ToList();
             carteiraSalvar.Nome = carteira.Nome;
             _contexto.SaveChanges();
         }
@@ -70,6 +71,7 @@ namespace Repositorio
         {
             Carteira carteiraExcluir = _contexto.Carteiras.Where(x => x.CarteiraId == id).First();
             //carteiraExcluir.Investimentos = null;
+            _contexto.Investimentos.RemoveRange(_contexto.Investimentos.Where(x => x.Carteira.CarteiraId == id));
             _contexto.Carteiras.Remove(carteiraExcluir);
             _contexto.SaveChanges();
             return "Excluído com sucesso!";

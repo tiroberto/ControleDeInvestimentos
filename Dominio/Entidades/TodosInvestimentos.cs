@@ -11,7 +11,7 @@ namespace Dominio.Entidades
         public int TodosInvestimentosId { get; set; }
         public string Nome { get; set; }
         public string Ticket { get; set; }
-        public Investimento InvestimentoUnico { get; set; }
+        public IEnumerable<Investimento> Investimentos { get; set; }
         public TipoInvestimento TipoInvestimento { get; set; }
     }
 }

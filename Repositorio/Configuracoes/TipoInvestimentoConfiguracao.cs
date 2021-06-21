@@ -19,6 +19,8 @@ namespace Repositorio.Configuracoes
                 .IsRequired()
                 .HasMaxLength(70)
                 .HasColumnName("Nome");
+            builder.HasMany(f => f.Investimentos)
+                .WithOne(f => f.TipoInvestimento);
         }
     }
 }

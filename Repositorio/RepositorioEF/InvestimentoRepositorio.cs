@@ -17,26 +17,33 @@ namespace Repositorio
             _contexto = new Contexto();
         }
 
-        public IEnumerable<Investimento> Listar()
+        public async Task<IEnumerable<Investimento>> Listar()
         {
-            return _contexto.Investimentos
-                .Include(x => x.InvestimentoUnico.TipoInvestimento)
+            return await _contexto.Investimentos
+                .Include(x => x.InvestimentoSelecionado.TipoInvestimento)
                 .Include(c => c.Carteira)
-                .ToList();
+                .ToListAsync();
         }
 
         public Investimento ListarPorId(int id)
         {
             return _contexto.Investimentos
-                .Include(x => x.InvestimentoUnico.TipoInvestimento)
+                .Include(x => x.InvestimentoSelecionado.TipoInvestimento)
                 .Include(c => c.Carteira)
                 .First(x => x.InvestimentoId == id);
         }
 
         public void Adicionar(Investimento investimento)
         {
-            investimento.InvestimentoUnico = _contexto.TodosInvestimentos.ToList().Where(x => x.TodosInvestimentosId == investimento.InvestimentoUnico.TodosInvestimentosId).FirstOrDefault();
-            investimento.Carteira = _contexto.Carteiras.ToList().Where(x => x.CarteiraId == investimento.Carteira.CarteiraId).FirstOrDefault();
+            investimento.InvestimentoSelecionado = _contexto.TodosInvestimentos
+                .Include(x => x.TipoInvestimento)
+                .ToList()
+                .Where(x => x.TodosInvestimentosId == investimento.InvestimentoSelecionado.TodosInvestimentosId)
+                .FirstOrDefault();
+            investimento.Carteira = _contexto.Carteiras
+                .ToList()
+                .Where(x => x.CarteiraId == investimento.Carteira.CarteiraId)
+                .FirstOrDefault();
             _contexto.Investimentos.Add(investimento);
             _contexto.SaveChanges();
         }

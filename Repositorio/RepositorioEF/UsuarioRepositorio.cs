@@ -17,17 +17,19 @@ namespace Repositorio.RepositorioEF
             _contexto = new Contexto();
         }
 
-        public IEnumerable<Usuario> Listar()
+        public async Task<IEnumerable<Usuario>> Listar()
         {
-            return _contexto.Usuario
+            return await _contexto.Usuario
                 .Include(x => x.Enderecos)
-                .ToList();
+                .Include(x => x.Carteiras)
+                .ToListAsync();
         }
 
         public Usuario ListarPorId(int id)
         {
             return _contexto.Usuario
                 .Include(x => x.Enderecos)
+                .Include(x => x.Carteiras)
                 .First(x => x.UsuarioId == id);
         }
 
@@ -39,11 +41,7 @@ namespace Repositorio.RepositorioEF
 
         public void Alterar(Usuario usuario)
         {
-            Usuario usuarioAlterar = _contexto.Usuario
-                .Include(x => x.Enderecos)
-                .Where(x=>x.UsuarioId == usuario.UsuarioId)
-                .First();
-            _contexto.Usuario.Update(usuarioAlterar);
+            _contexto.Usuario.Update(usuario);
             _contexto.SaveChanges();
         }
 
@@ -51,8 +49,11 @@ namespace Repositorio.RepositorioEF
         {
             Usuario usuarioExcluir = _contexto.Usuario
                 .Include(x => x.Enderecos)
+                .Include(x => x.Carteiras)
                 .Where(x => x.UsuarioId == id)
                 .First();
+            _contexto.Carteiras.RemoveRange(_contexto.Carteiras.Where(x => x.Usuario.UsuarioId == id));
+            _contexto.Endereco.RemoveRange(_contexto.Endereco.Where(x => x.Usuario.UsuarioId == id));
             _contexto.Usuario.Remove(usuarioExcluir);
             _contexto.SaveChanges();
             return "Excluído com sucesso!";

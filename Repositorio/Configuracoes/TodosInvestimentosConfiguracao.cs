@@ -14,15 +14,18 @@ namespace Repositorio.Configuracoes
     {
         public void Configure(EntityTypeBuilder<TodosInvestimentos> builder)
         {
-            builder.ToTable("TodosInvestimentos", "controledeinvestimentos");
+            builder.ToTable("todosinvestimentos", "controledeinvestimentos");
             builder.HasKey("TodosInvestimentosId");
             builder.Property(ti => ti.Nome);
             builder.Property(ti => ti.Ticket);
-            builder.HasOne(i => i.InvestimentoUnico)
-                .WithOne(c => c.InvestimentoUnico)
-                .HasForeignKey<Investimento>(p => p.InvestimentoId);
-            builder.HasOne(t => t.TipoInvestimento)
-                .WithMany(i => i.Investimentos);
+            builder.HasOne(ti => ti.TipoInvestimento)
+                .WithMany(ti => ti.Investimentos)
+                .HasForeignKey("TipoInvestimentoId");
+            builder.HasMany(ti => ti.Investimentos)
+                .WithOne(ti => ti.InvestimentoSelecionado);
+            //builder.HasOne(i => i.InvestimentoUnico)
+            //    .WithOne(c => c.InvestimentoUnico)
+            //    .HasForeignKey<Investimento>(p => p.InvestimentoId);
         }
     }
 }

@@ -54,9 +54,9 @@ namespace Aplicacao
             return _repositorio.Excluir(id);
         }
 
-        public IEnumerable<Endereco> Listar()
+        public async Task<IEnumerable<Endereco>> Listar()
         {
-            return _repositorio.Listar();
+            return await _repositorio.Listar();
         }
 
         public Endereco ListarPorId(int id)

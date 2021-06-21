@@ -53,9 +53,9 @@ namespace Aplicacao
             return _repositorio.Excluir(id);
         }
 
-        public IEnumerable<TipoInvestimento> Listar()
+        public async Task<IEnumerable<TipoInvestimento>> Listar()
         {
-            return _repositorio.Listar();
+            return await _repositorio.Listar();
         }
 
         public TipoInvestimento ListarPorId(int id)
